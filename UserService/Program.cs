@@ -1,4 +1,7 @@
 
+using UserService.Models;
+using UserService.Repository;
+
 namespace UserService
 {
     public class Program
@@ -7,7 +10,24 @@ namespace UserService
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(
+                    options =>
+                    {
+                        options.AddPolicy("AllowAll",
+                            builder =>
+                            {
+                                builder.AllowAnyOrigin()
+                                       .AllowAnyMethod()
+                                       .AllowAnyHeader();
+                            });
+                    }
+                );
             // Add services to the container.
+
+            builder.Services.AddTransient<UserDbContext>();
+            builder.Services.AddTransient<UserRepository>(
+               c => new UserRepository(c.GetRequiredService<UserDbContext>()));
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,6 +47,7 @@ namespace UserService
 
             app.UseAuthorization();
 
+            app.UseCors("AllowAll");
 
             app.MapControllers();
 

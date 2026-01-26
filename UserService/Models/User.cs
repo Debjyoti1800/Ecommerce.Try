@@ -7,7 +7,7 @@
         public string UserEmail { get; set; }
         public string PhoneNumber { get; set; }
         public DateTimeOffset DOB { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
         public DateTime CreatedAt { get; set; }
     }
 }
