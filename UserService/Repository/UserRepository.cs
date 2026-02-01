@@ -86,12 +86,12 @@ namespace UserService.Repository
         #endregion
 
         #region DeleteUser
-        public bool DeleteUser(Guid userId)
+        public bool DeleteUser(string email)
         {
             bool status = false;
             try
             {
-                var temp = _context.Users.FirstOrDefault(u => u.Id == userId);
+                var temp = _context.Users.FirstOrDefault(u => u.UserEmail == email);
                 if(temp != null)
                 {
                     _context.Users.Remove(temp);

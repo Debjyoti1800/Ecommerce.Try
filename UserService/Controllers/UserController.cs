@@ -91,13 +91,13 @@ namespace UserService.Controllers
         #endregion
 
         #region DeleteUser
-        [HttpDelete("{userId}")]
-        public IActionResult DeleteUser(Guid userId)
+        [HttpDelete("{email}")]
+        public IActionResult DeleteUser(string email)
         {
             bool status = false;
             try
             {
-                status = _userRepository.DeleteUser(userId);
+                status = _userRepository.DeleteUser(email);
             }
             catch (Exception)
             {

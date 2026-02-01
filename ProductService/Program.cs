@@ -1,4 +1,7 @@
 
+using ProductService.Models;
+using ProductService.Repository;
+
 namespace ProductService
 {
     public class Program
@@ -7,7 +10,24 @@ namespace ProductService
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(
+                    options =>
+                    {
+                        options.AddPolicy("AllowAll",
+                            builder =>
+                            {
+                                builder.AllowAnyOrigin()
+                                       .AllowAnyMethod()
+                                       .AllowAnyHeader();
+                            });
+                    }
+                );
             // Add services to the container.
+
+            builder.Services.AddTransient<ProductDbContext>();
+            builder.Services.AddTransient<ProductRepository>(
+               c => new ProductRepository(c.GetRequiredService<ProductDbContext>()));
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,6 +47,7 @@ namespace ProductService
 
             app.UseAuthorization();
 
+            app.UseCors("AllowAll");
 
             app.MapControllers();
 
