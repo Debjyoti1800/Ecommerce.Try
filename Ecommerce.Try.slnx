@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="APIGateway/APIGateway.csproj" Id="eeea1eaf-6d13-4287-bc6f-ada909cd9c0e" />
+  <Project Path="APIGateway/APIGateway.csproj" DisplayName="ApiGateWay" Id="e1bc23a0-c120-418b-84fc-7619ae7c0a0b" />
   <Project Path="CartService/CartService.csproj" />
   <Project Path="InventoryService/InventoryService.csproj" />
   <Project Path="OrderService/OrderService.csproj" />

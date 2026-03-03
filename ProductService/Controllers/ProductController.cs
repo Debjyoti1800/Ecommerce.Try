@@ -36,15 +36,15 @@ namespace ProductService.Controllers
         #endregion
 
         #region GetProductsByCategoryId
-        [HttpGet("{id:guid}")]
-        public IActionResult GetProductsByCategoryId(Guid id)
+        [HttpGet("category/{categoryId:guid}")]
+        public IActionResult GetProductsByCategoryId(Guid categoryId)
         {
             try
             {
-                if (id == Guid.Empty)
+                if (categoryId == Guid.Empty)
                     return Json(new { success = false, message = "Invalid category id." });
 
-                var result = _productRepository.GetProductsByCategoryId(id);
+                var result = _productRepository.GetProductsByCategoryId(categoryId);
                 return Json(result);
             }
             catch (Exception ex)
@@ -99,7 +99,7 @@ namespace ProductService.Controllers
         #endregion
 
         #region AddProductsBulk
-        [HttpPost]
+        [HttpPost("Bulk")]
         public IActionResult AddProductsBulk(List<Product> products)
         {
             try
